@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'output.ui'
-#
-# Created by: PyQt5 UI code generator 5.9.2
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_GeneticalAlgorithm(object):
     def setupUi(self, GeneticalAlgorithm):
@@ -22,6 +15,7 @@ class Ui_GeneticalAlgorithm(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.pushButton = QtWidgets.QPushButton(GeneticalAlgorithm)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.save_path)
         self.horizontalLayout.addWidget(self.pushButton)
         self.lineEdit = QtWidgets.QLineEdit(GeneticalAlgorithm)
         self.lineEdit.setEnabled(False)
@@ -72,7 +66,9 @@ class Ui_GeneticalAlgorithm(object):
         self.horizontalLayout_10.addWidget(self.checkBox_3)
         self.verticalLayout_6.addLayout(self.horizontalLayout_10)
         self.horizontalLayout_3.addLayout(self.verticalLayout_6)
-        spacerItem = QtWidgets.QSpacerItem(30, 10, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            30, 10, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum
+        )
         self.horizontalLayout_3.addItem(spacerItem)
         self.verticalLayout_5 = QtWidgets.QVBoxLayout()
         self.verticalLayout_5.setObjectName("verticalLayout_5")
@@ -86,7 +82,9 @@ class Ui_GeneticalAlgorithm(object):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.check_every = QtWidgets.QCheckBox(GeneticalAlgorithm)
         self.check_every.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.check_every.sizePolicy().hasHeightForWidth())
@@ -95,7 +93,9 @@ class Ui_GeneticalAlgorithm(object):
         self.horizontalLayout_4.addWidget(self.check_every)
         self.lineEdit_4 = QtWidgets.QLineEdit(GeneticalAlgorithm)
         self.lineEdit_4.setEnabled(False)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineEdit_4.sizePolicy().hasHeightForWidth())
@@ -114,7 +114,7 @@ class Ui_GeneticalAlgorithm(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
 
         self.retranslateUi(GeneticalAlgorithm)
-        self.check_every.clicked['bool'].connect(self.lineEdit_4.setEnabled)
+        self.check_every.clicked["bool"].connect(self.lineEdit_4.setEnabled)
         QtCore.QMetaObject.connectSlotsByName(GeneticalAlgorithm)
 
     def retranslateUi(self, GeneticalAlgorithm):
@@ -123,7 +123,7 @@ class Ui_GeneticalAlgorithm(object):
         GeneticalAlgorithm.setTitle(_translate("GeneticalAlgorithm", "Output"))
         self.pushButton.setText(_translate("GeneticalAlgorithm", "Save as"))
         self.label_2.setText(_translate("GeneticalAlgorithm", "Precision: "))
-        self.lineEdit_2.setText(_translate("GeneticalAlgorithm", "min"))
+        self.lineEdit_2.setPlaceholderText("min")
         self.lineEdit_3.setText(_translate("GeneticalAlgorithm", "max"))
         self.checkBox.setText(_translate("GeneticalAlgorithm", "Compress"))
         self.checkBox_2.setText(_translate("GeneticalAlgorithm", "History"))
@@ -132,9 +132,19 @@ class Ui_GeneticalAlgorithm(object):
         self.check_every.setText(_translate("GeneticalAlgorithm", "Check Every"))
         self.checkBox_6.setText(_translate("GeneticalAlgorithm", "Prompt on exception"))
 
+    def save_path(self):
+        options = QtWidgets.QFileDialog.Options()
+        options |= QtWidgets.QFileDialog.DontUseNativeDialog
+        filename, _ = QtWidgets.QFileDialog.getSaveFileName(
+            QtWidgets.QWidget(), "Save As", "", options=options
+        )
+        if filename:
+            self.lineEdit.setText(filename)
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     GeneticalAlgorithm = QtWidgets.QGroupBox()
     ui = Ui_GeneticalAlgorithm()

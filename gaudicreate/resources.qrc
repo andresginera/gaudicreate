@@ -2,5 +2,6 @@
 <qresource>
     <file>icons/add.png</file>
     <file>icons/less.png</file>
+    <file>icons/close.png</file>
 </qresource>
 </RCC>
